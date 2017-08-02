@@ -45,6 +45,7 @@ int main () {
 			houses.insert(std::make_pair(rSantaX, rSantaY));
 		santasTurn = !santasTurn;
 	}
+	ifs.close();
 	std::cout << houses.size();
 	return 0;
 }

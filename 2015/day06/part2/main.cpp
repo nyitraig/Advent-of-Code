@@ -54,6 +54,7 @@ int main () {
 					lights[i][j] += 2;
 		}
 	}
+	ifs.close();
 	for (int i = 0; i < 1000; i++)
 		for (int j = 0; j < 1000; j++)
 			result += lights[i][j];

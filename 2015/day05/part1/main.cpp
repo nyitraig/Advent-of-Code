@@ -56,6 +56,7 @@ int main () {
 	while (ifs >> s)
 		if (rule1(s) && rule2(s) && !rule3(s))
 			result++;
+	ifs.close();
 	std::cout << result;
 	return 0;
 }

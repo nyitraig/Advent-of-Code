@@ -44,6 +44,7 @@ int main () {
 		else if (h >= l && h >= w)
 			total += l * w;
 	}
+	ifs.close();
 	std::cout << total;
 	return 0;
 }

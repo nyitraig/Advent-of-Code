@@ -35,6 +35,7 @@ int main () {
 			if (line[i] == '\"' || line[i] == '\\')
 				result++;
 	}
+	ifs.close();
 	std::cout << result;
 	return 0;
 }

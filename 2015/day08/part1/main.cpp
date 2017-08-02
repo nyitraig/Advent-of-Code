@@ -53,6 +53,7 @@ int main () {
 				i++;
 			}
 	}
+	ifs.close();
 	std::cout << result;
 	return 0;
 }

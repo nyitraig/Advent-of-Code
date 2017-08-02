@@ -42,6 +42,7 @@ int main () {
 		}
 		houses.insert(std::make_pair(x, y));
 	}
+	ifs.close();
 	std::cout << houses.size();
 	return 0;
 }

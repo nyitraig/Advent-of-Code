@@ -60,6 +60,7 @@ int main () {
 					lights[i][j] = !lights[i][j];
 		}
 	}
+	ifs.close();
 	for (int i = 0; i < 1000; i++)
 		for (int j = 0; j < 1000; j++)
 			if (lights[i][j])

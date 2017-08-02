@@ -42,6 +42,7 @@ int main () {
 			total += 2 * (l + w);
 		total += l * w * h;
 	}
+	ifs.close();
 	std::cout << total;
 	return 0;
 }
