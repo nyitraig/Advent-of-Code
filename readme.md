@@ -6,4 +6,5 @@ I plan to solve each years event in a different language.
 
 ## languages
 * 2015 - `c++`
-* 2016 - `java`
+* 2016
+* 2017 - `javascript`
