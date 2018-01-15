@@ -12,6 +12,7 @@
  * - <{o"i!a,<{i<a>, 10 characters.
  * How many non-canceled characters are within the garbage in your puzzle input?
  */
+
 "use strict";
 
 var input = document.getElementsByTagName("pre")[0].innerHTML.trim();

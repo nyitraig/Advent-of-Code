@@ -52,6 +52,7 @@
  * - {{<a!>},{<a!>},{<a!>},{<ab>}}, score of 1 + 2 = 3.
  * What is the total score for all groups in your input?
  */
+
 "use strict";
 
 var input = document.getElementsByTagName("pre")[0].innerHTML.trim();
