@@ -18,7 +18,6 @@ input.forEach(e => {
 		case "sw": x--; z++; break;
 		case "se": x++; y--; break;
 		case "nw": x--; y++; break;
-		default: break;
 	}
 	var dist = Math.max(Math.abs(x), Math.abs(y), Math.abs(z));
 	max = dist > max ? dist : max;
