@@ -1,12 +1,12 @@
 "use strict";
 
-var input = document.getElementsByTagName("pre")[0]
-	.innerHTML.trim().split('\t').map(Number);
+var input = document.getElementsByTagName("pre")[0].innerText.trim()
+	.split('\t').map(Number);
 var states = [input.toString()];
 
 while (true) {
-	var max = Math.max(...input), maxInd = input.indexOf(max);
-	var inc = Math.floor(max / input.length);
+	let max = Math.max(...input), maxInd = input.indexOf(max);
+	let inc = Math.floor(max / input.length);
 	max = max % input.length;
 
 	input[maxInd] = 0;
@@ -23,4 +23,6 @@ while (true) {
 	}
 }
 
-console.log(states.length - states.indexOf(input.toString()));
+
+console.log("%canswer: " + (states.length - states.indexOf(input.toString())),
+	"font-size: x-large");

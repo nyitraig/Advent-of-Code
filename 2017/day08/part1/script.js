@@ -2,35 +2,29 @@
 
 function compare (a, b, operator) {
 	switch (operator) {
-		case "==":    return a == b;
-		case "!=":    return a != b;
-		case "&lt;":  return a < b;
-		case "&lt;=": return a <= b;
-		case "&gt;":  return a > b;
-		case "&gt;=": return a >= b;
-		default:      return false;
+		case "==" : return a == b;
+		case "!=" : return a != b;
+		case  "<" : return a < b;
+		case "<=" : return a <= b;
+		case  ">" : return a > b;
+		case ">=" : return a >= b;
 	}
 }
 
 var registers = new Map();
 
-document.getElementsByTagName("pre")[0].innerHTML.trim().split('\n').forEach(e => {
-	var instruction = e.split(' ');
-	var regA = instruction[0], regB = instruction[4];
-	if (!registers.has(regA)) {
-		registers.set(regA, 0);
-	}
-	if (!registers.has(regB)) {
-		registers.set(regB, 0);
-	}
-	if (compare(registers.get(regB), parseInt(instruction[6]), instruction[5])) {
-		if (instruction[1] == "inc") {
-			registers.set(regA, registers.get(regA) + parseInt(instruction[2]));
-		}
-		if (instruction[1] == "dec") {
-			registers.set(regA, registers.get(regA) - parseInt(instruction[2]));
-		}
+document.getElementsByTagName("pre")[0].innerText.trim().split('\n').forEach(e => {
+	let instruction = e.split(' ');
+	let regA = instruction[0], regB = instruction[4];
+	let regBVal = registers.has(regB) ? registers.get(regB) : 0;
+	if (compare(regBVal, parseInt(instruction[6]), instruction[5])) {
+		let regAVal = registers.has(regA) ? registers.get(regA) : 0;
+		regAVal += (instruction[1] == "inc")
+			? parseInt(instruction[2])
+			: -parseInt(instruction[2]);
+		registers.set(regA, regAVal);
 	}
 });
 
-console.log(Math.max(...[...registers].map(([k, v]) => v)));
+console.log("%canswer: " + Math.max(...[...registers].map(([k, v]) => v)),
+	"font-size: x-large");

@@ -1,16 +1,18 @@
 "use strict";
 
-var checksum = 0;
-
-document.getElementsByTagName("pre")[0].innerHTML.trim().split('\n').forEach(e => {
-	var arr = e.split('\t').map(Number);
-	for (var i = 0; i < arr.length; i++) {
-		for (var j = 0; j < arr.length; j++) {
-			if (arr[i] % arr[j] == 0 && i != j) {
-				checksum += arr[i] / arr[j];
+var input = document.getElementsByTagName("pre")[0].innerText.trim().split('\n');
+var checksum = input.reduce((accumulator, currentValue) => {
+	let row = currentValue.split('\t').map(Number);
+	for (let i = 0; i < row.length; i++) {
+		for (let j = i + 1; j < row.length; j++) {
+			if (row[i] % row[j] == 0) {
+				return accumulator + row[i] / row[j];
+			}
+			if (row[j] % row[i] == 0) {
+				return accumulator + row[j] / row[i];
 			}
 		}
 	}
-});
+}, 0);
 
-console.log(checksum);
+console.log("%canswer: " + checksum, "font-size: x-large");

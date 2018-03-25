@@ -1,13 +1,13 @@
 "use strict";
 
-var sum = 0;
-var input = document.getElementsByTagName("pre")[0].innerHTML.trim()
+var input = document.getElementsByTagName("pre")[0].innerText.trim()
 	.split('').map(Number);
+var sum = 0;
 
-for (var i = 0; i < input.length; i++) {
+for (let i = 0; i < input.length; i++) {
 	if (input[i] == input[(i + 1) % input.length]) {
 		sum += input[i];
 	}
 }
 
-console.log(sum);
+console.log("%canswer: " + sum, "font-size: x-large");

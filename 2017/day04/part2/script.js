@@ -1,16 +1,10 @@
 "use strict";
 
-var n = 0;
+var input = document.getElementsByTagName("pre")[0].innerText.trim().split('\n');
+var result = input.reduce((accumulator, currentLine) => {
+	let arr = currentLine.split(' ').map(x => x.split('').sort().join(''));
+	let set = new Set(arr);
+	return accumulator += (set.size == arr.length) ? 1 : 0;
+}, 0);
 
-document.getElementsByTagName("pre")[0].innerHTML.trim().split('\n').forEach(e => {
-	var arr = e.split(' ').map(x => x.split('').sort().join()).sort();
-	for (var i = 0; i < arr.length - 1; i++) {
-		if (arr[i] == arr[i + 1]) {
-			n--;
-			break;
-		}
-	}
-	n++;
-});
-
-console.log(n);
+console.log("%canswer: " + result, "font-size: x-large");
