@@ -15,14 +15,13 @@ var registers = new Map();
 var max = 0;
 
 document.getElementsByTagName("pre")[0].innerText.trim().split('\n').forEach(e => {
-	let instruction = e.split(' ');
-	let regA = instruction[0], regB = instruction[4];
+	let [regA, instr, amount, _, regB, op, value] = e.split(' ');
 	let regBVal = registers.has(regB) ? registers.get(regB) : 0;
-	if (compare(regBVal, parseInt(instruction[6]), instruction[5])) {
+	if (compare(regBVal, Number(value), op)) {
 		let regAVal = registers.has(regA) ? registers.get(regA) : 0;
-		regAVal += (instruction[1] == "inc")
-			? parseInt(instruction[2])
-			: -parseInt(instruction[2]);
+		regAVal += (instr == "inc")
+			? Number(amount)
+			: -Number(amount);
 		registers.set(regA, regAVal);
 		max = regAVal > max ? regAVal : max;
 	}

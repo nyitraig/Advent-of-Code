@@ -23,6 +23,5 @@ while (true) {
 	}
 }
 
-
 console.log("%canswer: " + (states.length - states.indexOf(input.toString())),
 	"font-size: x-large");

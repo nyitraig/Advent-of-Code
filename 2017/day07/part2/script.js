@@ -42,10 +42,10 @@ var regex  = /(.*) \((.*)\)(?: -> (.*))?/;
 var forest = [];
 
 document.getElementsByTagName("pre")[0].innerText.trim().split('\n').forEach(e => {
-	let match = regex.exec(e.replace(/&gt;/g, ">"));
-	let node = new Node(match[1], parseInt(match[2]));
-	if (match[3]) {
-		match[3].split(", ").forEach(name => {
+	let [_, name, weight, children] = regex.exec(e);
+	let node = new Node(name, Number(weight));
+	if (children) {
+		children.split(", ").forEach(name => {
 			let i = forest.findIndex(x => x.Name == name);
 			if (i == -1) {
 				node.Children.push(new Node(name, 0));
