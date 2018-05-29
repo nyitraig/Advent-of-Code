@@ -24,4 +24,4 @@ File.read("input").split(", ").each do |instruction|
   end
 end
 
-puts visited.select { |x| visited.count(x) >= 2}.first.map(&:abs).sum
+puts visited.select { |x| visited.count(x) >= 2 }.first.map(&:abs).sum
