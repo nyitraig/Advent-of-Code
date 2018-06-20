@@ -11,5 +11,5 @@ end
 
 puts File.readlines("input").map { |x| x.match(/(.*)-(.*)\[(.*)\]/).captures }
   .select { |name, _, checksum| letters_by_frequency(name).start_with?(checksum) }
-  .select { |name, id, _| shift_by(name, id.to_i).include?("north")}
-  .map { |name, id, _| shift_by(name, id.to_i) + " " + id}
+  .select { |name, id, _| shift_by(name, id.to_i).include?("north") }
+  .map { |name, id, _| shift_by(name, id.to_i) + " " + id }
