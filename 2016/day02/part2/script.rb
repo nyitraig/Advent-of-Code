@@ -10,7 +10,7 @@ File.readlines("input").each do |line|
   i = 2
   j = 0
 
-  line.split("").each do |c|
+  line.each_char do |c|
     case c
     when "U" then i -= 1 if i > 0 && INPUT[i - 1][j] != " "
     when "D" then i += 1 if i < 4 && INPUT[i + 1][j] != " "
@@ -22,4 +22,4 @@ File.readlines("input").each do |line|
   result.push(INPUT[i][j])
 end
 
-puts result.join("")
+puts result.join

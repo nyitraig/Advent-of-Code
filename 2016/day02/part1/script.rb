@@ -4,7 +4,7 @@ File.readlines("input").each do |line|
   i = 1
   j = 1
 
-  line.split("").each do |c|
+  line.each_char do |c|
     case c
     when "U" then i -= 1 if i > 0
     when "D" then i += 1 if i < 2
@@ -16,4 +16,4 @@ File.readlines("input").each do |line|
   result.push(3 * i + j + 1)
 end
 
-puts result.join("")
+puts result.join
