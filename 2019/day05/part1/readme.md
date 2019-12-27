@@ -2,7 +2,7 @@
 
 You're starting to sweat as the ship makes its way toward Mercury. The Elves suggest that you get the air conditioner working by upgrading your ship computer to support the Thermal Environment Supervision Terminal.
 
-The Thermal Environment Supervision Terminal (TEST) starts by running a __diagnostic program__ (your puzzle input). The TEST diagnostic program will run on [your existing Intcode computer](day02/part1/script.py) after a few modifications:
+The Thermal Environment Supervision Terminal (TEST) starts by running a __diagnostic program__ (your puzzle input). The TEST diagnostic program will run on [your existing Intcode computer](../../day02/part2/script.py) after a few modifications:
 
 __First__, you'll need to add __two new instructions__:
 
