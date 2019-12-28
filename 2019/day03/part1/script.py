@@ -1,6 +1,7 @@
 import sys
+from typing import List, Tuple
 
-def points(path):
+def points(path: str) -> List[Tuple[int, int]]:
     result = [(0, 0)]
     for p in path:
         x, y = result[-1]
