@@ -10,7 +10,7 @@ There are five amplifiers connected in series; each one receives an input signal
     O-------O  O-------O  O-------O  O-------O  O-------O
 ```
 
-The Elves have sent you some __Amplifier Controller Software__ (your puzzle input), a program that should run on your [existing Intcode computer](../../day05/part2/script.py). Each amplifier will need to run a copy of the program.
+The Elves have sent you some __Amplifier Controller Software__ (your puzzle input), a program that should run on your [existing Intcode computer](../../intcode.py). Each amplifier will need to run a copy of the program.
 
 When a copy of the program starts running on an amplifier, it will first use an input instruction to ask the amplifier for its current __phase setting__ (an integer from `0` to `4`). Each phase setting is used __exactly once__, but the Elves can't remember which amplifier needs which phase setting.
 
