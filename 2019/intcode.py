@@ -1,47 +1,46 @@
-from typing import List
+from typing import List, Optional
+
+class Event:
+    """from https://stackoverflow.com/a/57069782"""
+    def __init__(self):
+        self.listeners = []
+
+    def __iadd__(self, listener):
+        """Shortcut for using += to add a listener."""
+        self.listeners.append(listener)
+        return self
+
+    def notify(self, *args, **kwargs):
+        for listener in self.listeners:
+            listener(*args, **kwargs)
 
 class Computer:
     def __init__(self, program: List[int]):
-        self._program = program.copy()
-        self._ptr = 0 # instruction pointer
-        self._rb = 0  # relative base
-        self._opc = 0 # opcode
-        self._mp1 = 0 # mode of 1st parameter
-        self._mp2 = 0 # mode of 2nd parameter
-        self._mp3 = 0 # mode of 3rd parameter
-        self._in = [] # input list
-        self._out = 0 # output code
-        self._is_waiting_for_input = False
-        self._is_halted = False
+        self.program: List[int] = program.copy()
+        self.is_halted: bool = False
+        self.is_waiting_for_input: bool = False
+        self.output: Optional[int] = None
 
-    @property
-    def program(self) -> List[int]:
-        return self._program
+        # events
+        self.requiring_input: Event = Event()
+        self.value_outputted: Event = Event()
+        self.halted: Event = Event()
 
-    @program.setter
-    def program(self, value: List[int]) -> None:
-        self._program = value.copy()
-
-    @property
-    def is_halted(self) -> bool:
-        return self._is_halted
-
-    @property
-    def input(self) -> List[int]:
-        return self._in
-
-    @input.setter
-    def input(self, value: List[int]) -> None:
-        self._in = value.copy()
-        self._is_waiting_for_input = not bool(len(self._in))
-
-    @property
-    def output(self) -> int:
-        return self._out
+        self._ptr: int = 0
+        self._rb: int = 0
+        self._opc: Optional[int] = None
+        self._mp1: Optional[int] = None
+        self._mp2: Optional[int] = None
+        self._mp3: Optional[int] = None
+        self._inputs: List[int] = []
 
     def run(self) -> None:
-        while not self._is_halted and not self._is_waiting_for_input:
+        while not self.is_halted and not self.is_waiting_for_input:
             self._process_instruction()
+
+    def provide_input(self, input: int) -> None:
+        self._inputs += [input]
+        self.is_waiting_for_input = False
 
     def _process_instruction(self) -> None:
         opc = self._read_memory(self._ptr)
@@ -70,17 +69,17 @@ class Computer:
             0: self._read_memory(index),
             1: index,
             2: self._rb + self._read_memory(index)
-        }.get(mode)
+        }.get(mode, self._read_memory(index))
 
     def _read_memory(self, address: int) -> int:
-        if address >= len(self._program):
-            self._program += [0] * (address - len(self._program) + 1)
-        return self._program[address]
+        if address >= len(self.program):
+            self.program += [0] * (address - len(self.program) + 1)
+        return self.program[address]
 
     def _write_memory(self, address: int, value: int) -> None:
-        if address >= len(self._program):
-            self._program += [0] * (address - len(self._program) + 1)
-        self._program[address] = value
+        if address >= len(self.program):
+            self.program += [0] * (address - len(self.program) + 1)
+        self.program[address] = value
 
     def _add(self) -> None:
         p1 = self._get_parameter(self._ptr + 1, self._mp1)
@@ -97,16 +96,18 @@ class Computer:
         self._ptr += 4
 
     def _input(self) -> None:
-        if not len(self._in):
-            self._is_waiting_for_input = True
-            return
-        ap1 = self._get_parameter_address(self._ptr + 1, self._mp1)
-        self._write_memory(ap1, self._in.pop(0))
-        self._ptr += 2
+        if not len(self._inputs):
+            self.is_waiting_for_input = True
+            self.requiring_input.notify(self)
+        else:
+            ap1 = self._get_parameter_address(self._ptr + 1, self._mp1)
+            self._write_memory(ap1, self._inputs.pop(0))
+            self._ptr += 2
 
     def _output(self) -> None:
         p1 = self._get_parameter(self._ptr + 1, self._mp1)
-        self._out = p1
+        self.output = p1
+        self.value_outputted.notify(self, p1)
         self._ptr += 2
 
     def _jump_if_true(self) -> None:
@@ -139,4 +140,5 @@ class Computer:
         self._ptr += 2
 
     def _halt(self) -> None:
-        self._is_halted = True
+        self.is_halted = True
+        self.halted.notify(self)
