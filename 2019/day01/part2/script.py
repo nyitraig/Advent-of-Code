@@ -1,7 +1,7 @@
 import sys
 
 def fuel(mass: int) -> int:
-    f = int(mass / 3) - 2
+    f = mass // 3 - 2
     return f + fuel(f) if f > 0 else 0
 
 input = [int(x) for x in open(sys.argv[1]).read().strip().split('\n')]
