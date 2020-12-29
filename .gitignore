@@ -1,0 +1,12 @@
+﻿# puzzle input
+input.txt
+
+# build results
+[Oo]bj/
+[Bb]in/
+
+# project properties
+[Pp]roperties/
+
+# Visual Studio cache/options directory
+.vs/

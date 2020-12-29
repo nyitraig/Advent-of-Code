@@ -11,3 +11,4 @@ I plan to solve each years puzzles in a different language.
 * [2017](./2017/) - `javascript ES6`
 * 2018 - `TBD`
 * [2019](./2019/) - `python 3.7.5`
+* [2020](./2020/) - `C# 8.0`
